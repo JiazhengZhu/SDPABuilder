@@ -1,8 +1,8 @@
 language: julia
 os:
-  - linux
+- linux
 julia:
-  - 1.0
+- 1.0
 notifications:
   email: false
 git:
@@ -10,31 +10,24 @@ git:
 cache:
   timeout: 1000
   directories:
-    - downloads
+  - downloads
 env:
   global:
-    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
-    - BINARYBUILDER_AUTOMATIC_APPLE=true
+  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+  - BINARYBUILDER_AUTOMATIC_APPLE=true
 sudo: required
-
-# Before anything else, get the latest versions of things
 before_script:
-  - julia -e 'using Pkg; Pkg.add(PackageSpec(url="https://github.com/JuliaPackaging/BinaryProvider.jl"))'
-  - julia -e 'using Pkg; Pkg.add(PackageSpec(url="https://github.com/JuliaPackaging/BinaryBuilder.jl")); Pkg.build()'
-
+- julia -e 'using Pkg; Pkg.add(PackageSpec(url="https://github.com/JuliaPackaging/BinaryProvider.jl"))'
+- julia -e 'using Pkg; Pkg.add(PackageSpec(url="https://github.com/JuliaPackaging/BinaryBuilder.jl"));
+  Pkg.build()'
 script:
-  - julia build_tarballs.jl
-
-
+- julia build_tarballs.jl
 deploy:
-    provider: releases
-    api_key:
-        # Note; this api_key is only valid for juan-pablo-vielma/SDPABuilder; you need
-        # to make your own: https://docs.travis-ci.com/user/deployment/releases/
-        "dc00c0372ba10f3a28d280469c352e5593fc6a13"
-    file_glob: true
-    file: products/*
-    skip_cleanup: true
-    on:
-        repo: JiazhengZhu/SDPABuilder
-        tags: true
+  provider: releases
+  api_key:
+    secure: o2/bg/iS5zyticdskzoBhpfy7qChhnu+O1+yr6PdwI2AI/O29hxbhv79n3mYOqnp5xAbKlekEIX1qJk+8BRWyclWxy+8vVKrM0e04IY6X8uNiheHG0lsizvWLsyylpFieazUmc/lKPg1UPfteHKB4o7Ao5ScgRkX5757qm/Am8PS5iVdp5OLGtPul8OrS4ZMadowH285pVisFNb5Jjq8aHEMsqf4GyEdsEtXn4XPlnmrqTtuzxlDIpW+vL0h2qXtxBYNDKdCzDyJ+WpOfTwlXpENQDHxRJ6I941IBFoT9/OZ4iC/0qKEFufIk32r0XN2xxDUoxu1yrhOUiSKW8wgcRtu2XDBDU+aijsj4RkFZ6X6VMuXxQRbP35ImLJlEK2hFG/UYemXwVIMiA0PYYNGzId6Y1uzzkh9DAqS+jy2wPCYX4mT17UvkSkw2FkRBm6vDVFUXSAs7eZK9Xx0n69+RyClG7jhAyCmj+2pbVP1v2zsPIgsBjByQ0uSgcMKTb/w2hLj6jKL6zutpvaAE6L2O8rm+nHBa2Gd25k0CaBmCbVjwQrMtsielDQwLSu2qd+BXw3R2AUIHpOKgiDVSG+5+QwPsQSc5ptAbuHNvupNbp6BVf4+VHcToSnbaqmbmoIhfCmr1HWMorBjCyN8H23OD5xQWs8ZSj6i2xjyg0IW3DY=
+  file: product/*
+  skip_cleanup: true
+  on:
+    repo: JiazhengZhu/SDPABuilder
+    tags: true
