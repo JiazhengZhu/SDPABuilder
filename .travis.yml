@@ -31,7 +31,7 @@ deploy:
     api_key:
         # Note; this api_key is only valid for juan-pablo-vielma/SDPABuilder; you need
         # to make your own: https://docs.travis-ci.com/user/deployment/releases/
-        "697e22aee54f4e77ebb9cbaa638651bf102e08d1"
+        "dc00c0372ba10f3a28d280469c352e5593fc6a13"
     file_glob: true
     file: products/*
     skip_cleanup: true
